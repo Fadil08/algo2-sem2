@@ -1,0 +1,99 @@
+import tkinter as tk
+import math
+
+
+def segitiga(cnv,panjang,titikA,lvl,curlvl):
+
+    if lvl == 1:
+        print('segitiga dasar/asli')
+        cnv.create_text(titikA[0], titikA[1], text='A')
+        Bx = math.cos( math.radians(60) ) * panjang
+        By = math.sin( math.radians(60) ) * panjang
+        cnv.create_text(titikA[0] + Bx, titikA[1] + By, text='B')
+
+        Cx = math.cos( math.radians(120) ) * panjang
+        Cy = math.sin( math.radians(120) ) * panjang
+        cnv.create_text(titikA[0] + Cx, titikA[1] + Cy, text='C')
+
+        cnv.create_line(titikA[0], titikA[1], titikA[0]+Bx, titikA[1]+By)
+        cnv.create_line(titikA[0], titikA[1], titikA[0]+Cx, titikA[1]+Cy)
+        cnv.create_line(titikA[0]+Bx, titikA[1]+By, titikA[0]+Cx, titikA[1]+Cy)
+    if curlvl <=lvl:
+
+        ax2 = math.cos(math.radians(60)) * (panjang/3)
+        ay2 = math.sin(math.radians(60)) * (panjang/3)
+        bx2 = math.cos(math.radians(60)) * (panjang/3+100)
+        by2 = math.sin(math.radians(60)) * (panjang/3+100)
+
+        # listgaris.append([ax2,ay2],[bx2,by2],[cx2,cy2])
+        cnv.create_text(titikA[0]+ ax2,titikA[1]+ay2, text='A1')
+        cnv.create_text(titikA[0]+ bx2,titikA[1]+by2, text='A2')
+        cnv.create_text(titikA[0]+ ax2+bx2,titikA[1]+ay2, text='A3')
+
+        cnv.create_line(titikA[0]+ ax2, titikA[1]+ay2, titikA[0]+ bx2, titikA[1]+by2)
+        cnv.create_line(titikA[0]+ ax2, titikA[1]+ay2, titikA[0]+ ax2+bx2, titikA[1]+ay2)
+        cnv.create_line(titikA[0]+ bx2, titikA[1]+by2, titikA[0]+ ax2+bx2, titikA[1]+ay2)
+
+        ax3 = math.cos(math.radians(120)) * (panjang/3)
+        ay3 = math.sin(math.radians(120)) * (panjang/3)
+        bx3 = math.cos(math.radians(120)) * (panjang/3+100)
+        by3 = math.sin(math.radians(120)) * (panjang/3+100)
+
+        cnv.create_text(titikA[0]+ ax3,titikA[1]+ay3, text='B1')
+        cnv.create_text(titikA[0]+ bx3,titikA[1]+by3, text='B2')
+        cnv.create_text(titikA[0]+ ax3+bx3,titikA[1]+ay3, text='B3')
+
+        cnv.create_line(titikA[0]+ ax3, titikA[1]+ay3, titikA[0]+ bx3, titikA[1]+by3)
+        cnv.create_line(titikA[0]+ ax3, titikA[1]+ay3, titikA[0]+ ax3+bx3, titikA[1]+ay3)
+        cnv.create_line(titikA[0]+ bx3, titikA[1]+by3, titikA[0]+ ax3+bx3, titikA[1]+ay3)
+
+        cx3 = math.cos(math.radians(60)) * (panjang/3)
+        cy3 = math.sin(math.radians(60)) * (panjang/3)
+        dx3 = math.cos(math.radians(120)) * (panjang/3+100)
+        dy3 = math.sin(math.radians(120)) * (panjang/3+100)
+        # cnv.create_text(ax+bx,ay+by, text='B')
+        # cnv.create_line(ax+cx, ay+cy, ax+bx, ay+by)
+
+        # cnv.create_text(titikA[0]+ax2+bx2+c)
+        cnv.create_text(titikA[0]+cx3,titikA[1]+cy3+dy3, text='C1')
+        cnv.create_text(titikA[0]+cx3+dx3,titikA[1]+cy3+dy3, text='C2')
+        cnv.create_text(titikA[0]+dx3+bx2,titikA[1]+dy3+by2, text='C3')
+    
+
+        cnv.create_line(titikA[0]+cx3+dx3,titikA[1]+cy3+dy3, titikA[0]+bx2+dx3,titikA[1]+by2+dy3)
+        cnv.create_line(titikA[0]+ cx3, titikA[1]+cy3+by2, titikA[0]+ dx3+bx2, titikA[1]+dy3+by2)
+    if curlvl <=lvl ==3:
+        print('progres ke 3')
+        px2 = math.cos(math.radians(60)) * (panjang/9)
+        py2 = math.sin(math.radians(60)) * (panjang/9)
+        qx2 = math.cos(math.radians(120)) * (panjang/9)
+        qy2 = math.sin(math.radians(120)) * (panjang/9)
+        
+        cnv.create_text(titikA[0]+ax2+bx2+px2,titikA[1]+py2+ay2, text='p1')
+        cnv.create_text(titikA[0]+bx2+px2,titikA[1]+py2, text='p3')
+    
+    elif lvl == curlvl:
+        return segitiga(cnv, lvl+1, panjang, (ax, ay) )
+        
+
+
+
+
+
+
+
+
+panjang = 300
+ax = 550
+ay = 50
+
+lvl = int(input('masukkan level: '))
+
+
+window = tk.Tk()
+cnv= tk.Canvas(window,width=1000,height=500)
+cnv.pack()
+segitiga(cnv,panjang,(ax,ay),lvl,1 )
+
+
+window.mainloop()

@@ -1,0 +1,5 @@
+# Graph - Shortest Path (Dijkstra Algoritm)
+
+- Algoritma Dijkstra adalah sebuah prosedur iteratif yang mencari lintasan terpendek antara a dan z dalam graf dengan pembobot.
+- Prosesnya dengan cara mencari panjang lintasan terpendek dari sebuah simpul pendahulu  dan menambahkan simpul-simpul tersebut ke set simpul S. 
+- Algoritma berhenti setelah mencapai simpul z.
